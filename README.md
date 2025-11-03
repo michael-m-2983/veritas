@@ -35,4 +35,5 @@ You can request features through the issues tab, or make a PR yourself and I'll 
 
 ## TODO
 
+- [ ] Improve UX on mobile
 - [ ] Add additional ways to review content, e.g. matching, written, MCQ

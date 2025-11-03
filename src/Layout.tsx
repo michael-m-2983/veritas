@@ -16,7 +16,7 @@ export default function Layout() {
                     Veritas
                 </Text>
 
-                <ActionIcon variant="subtle" color="gray" onClick={() => modals.open({
+                <ActionIcon variant="subtle" color="rgba(255, 255, 255, 1)" onClick={() => modals.open({
                     children: <SetCreator />,
                     title: "Create New Set",
                     id: "create-new-set"
