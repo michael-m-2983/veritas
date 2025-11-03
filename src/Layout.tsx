@@ -1,7 +1,7 @@
-import { ActionIcon, AppShell, Group } from "@mantine/core";
+import { ActionIcon, AppShell, Group, Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import SetCreator from "./components/SetCreator";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 
 export default function Layout() {
     return <AppShell
@@ -12,9 +12,9 @@ export default function Layout() {
     >
         <AppShell.Header>
             <Group justify="space-between" px="md" h="100%">
-                <Group>
+                <Text component={Link} to="/" fw={500}>
                     Veritas
-                </Group>
+                </Text>
 
                 <ActionIcon variant="subtle" color="gray" onClick={() => modals.open({
                     children: <SetCreator />,
