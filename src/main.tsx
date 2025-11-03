@@ -14,6 +14,10 @@ import SetViewPage from './pages/SetView.tsx';
 import SetEditorPage from './pages/SetEditor.tsx';
 import { HomePage } from './pages/Home.tsx';
 
+import { shadcnTheme } from './theme/theme.ts';
+import { shadcnCssVariableResolver } from './theme/cssVariableResolver.ts';
+import "./theme/style.css"
+
 export const backend = new SupabaseBackend();
 
 const router = createHashRouter([
@@ -49,7 +53,7 @@ const router = createHashRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <MantineProvider>
+    <MantineProvider defaultColorScheme="dark" theme={shadcnTheme} cssVariablesResolver={shadcnCssVariableResolver}>
       <ModalsProvider>
         <RouterProvider router={router} />
       </ModalsProvider>

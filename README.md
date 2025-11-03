@@ -6,8 +6,7 @@ Veritas is a flash card website. It allows users to create, practice and update 
 
 ### Normally
 
-> [!WARNING] 
-> This section will be updated once the github pages deployment is online.
+Visit <https://michael-m-2983.github.io/veritas/>.
 
 ### Setting up a development server
 
@@ -36,5 +35,4 @@ You can request features through the issues tab, or make a PR yourself and I'll 
 
 ## TODO
 
-- [ ] Set up Github pages deployment
 - [ ] Add additional ways to review content, e.g. matching, written, MCQ
