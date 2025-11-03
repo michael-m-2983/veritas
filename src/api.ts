@@ -109,9 +109,8 @@ export class SupabaseBackend implements Backend {
     apiKey: string;
 
     constructor() {
-        //TODO: pull from secrets store
-        this.url = "";
-        this.apiKey = "";
+        this.url = import.meta.env.VITE_BACKEND_URL;
+        this.apiKey = import.meta.env.VITE_BACKEND_KEY;
     }
 
     connect() {
