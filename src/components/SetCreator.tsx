@@ -11,7 +11,7 @@ export default function SetCreator() {
         backend.createSet(name).then((setId) => {
             modals.closeAll();
 
-            window.location.href = `/#/set/${setId}/edit`;
+            window.location.href = `/veritas/#/set/${setId}/edit`;
         });
     };
 
