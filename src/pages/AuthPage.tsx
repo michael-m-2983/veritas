@@ -13,6 +13,7 @@ export const AuthPage = () => {
         theme="dark"
 
         providers={['github']}
+        redirectTo="https://michael-m-2983.github.io/veritas/"
         //TODO: Consider adding more social logins
         // providers={['google', 'facebook', 'github', 'apple', 'discord']}
         // socialLayout="horizontal"
