@@ -18,6 +18,9 @@ import { shadcnTheme } from './theme/theme.ts';
 import { shadcnCssVariableResolver } from './theme/cssVariableResolver.ts';
 import "./theme/style.css"
 
+import { AuthPage } from './pages/AuthPage.tsx';
+import { Auth } from '@supabase/auth-ui-react';
+
 export const backend = new SupabaseBackend();
 
 const router = createHashRouter([
@@ -28,6 +31,10 @@ const router = createHashRouter([
       {
         index: true,
         Component: HomePage
+      },
+      {
+        path: "auth",
+        Component: AuthPage
       },
       {
         path: "set/:setId",
@@ -55,7 +62,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <MantineProvider defaultColorScheme="dark" theme={shadcnTheme} cssVariablesResolver={shadcnCssVariableResolver}>
       <ModalsProvider>
-        <RouterProvider router={router} />
+        <Auth.UserContextProvider supabaseClient={backend.client}>
+          <RouterProvider router={router} />
+        </Auth.UserContextProvider>
       </ModalsProvider>
     </MantineProvider>
   </StrictMode>,

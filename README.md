@@ -35,5 +35,6 @@ You can request features through the issues tab, or make a PR yourself and I'll 
 
 ## TODO
 
+- [ ] Add a way to list all the sets owned by a single user
 - [ ] Improve UX on mobile
 - [ ] Add additional ways to review content, e.g. matching, written, MCQ

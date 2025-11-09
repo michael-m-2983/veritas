@@ -24,7 +24,7 @@ function SetGallery() {
     }, [setSets]);
 
     return <Stack>
-        {sets.map((set: [string, string, SetID]) => <Card shadow="sm" padding="md" withBorder component={Link} to={`/set/${set[2]}`}>
+        {sets.map((set: [string, string, SetID]) => <Card key={set[2]} shadow="sm" padding="md" withBorder component={Link} to={`/set/${set[2]}`}>
             <Text fw={700}>{set[0]}</Text>
             <Text>{set[1]}</Text>
         </Card>)}
