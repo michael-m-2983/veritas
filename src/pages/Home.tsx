@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { backend } from "../main";
-import { Card, Container, Space, Stack, Text, Title } from "@mantine/core";
+import { Card, Center, Container, Loader, Space, Stack, Text, Title } from "@mantine/core";
 import type { SetID } from "../api";
 import { Link } from "react-router";
 
@@ -22,6 +22,8 @@ function SetGallery() {
     useEffect(() => {
         backend.listSets().then(setSets);
     }, [setSets]);
+
+    if(sets.length == 0) return <Center><Loader /></Center>
 
     return <Stack>
         {sets.map((set: [string, string, SetID]) => <Card key={set[2]} shadow="sm" padding="md" withBorder component={Link} to={`/set/${set[2]}`}>

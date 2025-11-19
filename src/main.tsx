@@ -20,8 +20,11 @@ import "./theme/style.css"
 
 import { AuthPage } from './pages/AuthPage.tsx';
 import { Auth } from '@supabase/auth-ui-react';
+import { ReviewLayout, ReviewMatching, ReviewMenu, reviewMethods, ReviewTable } from './pages/Review.tsx';
 
 export const backend = new SupabaseBackend();
+
+const ReviewPage = () => <p>Hello, world!</p>;
 
 const router = createHashRouter([
   {
@@ -51,6 +54,20 @@ const router = createHashRouter([
           {
             path: "edit",
             Component: SetEditorPage
+          },
+          {
+            path: "review",
+            Component: ReviewLayout,
+            children: [
+              {
+                index: true,
+                Component: ReviewMenu
+              },
+              ...reviewMethods.map(method => ({
+                path: method.path,
+                Component: method.component
+              }))
+            ]
           }
         ]
       }
