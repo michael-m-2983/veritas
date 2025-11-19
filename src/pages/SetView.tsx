@@ -4,6 +4,7 @@ import type { Card, Set } from "../api";
 import { ActionIcon, Center, Container, Group, Paper, Space, Text, Title, Tooltip, Transition } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
+import { Auth } from "@supabase/auth-ui-react";
 
 export default function SetViewPage() {
     let loaderData = useLoaderData();
@@ -19,7 +20,7 @@ export default function SetViewPage() {
 
         <Space h={20} />
 
-        <ActionButtons />
+        <ActionButtons set={set} />
 
         <Space h={40} />
 
@@ -59,11 +60,11 @@ function Flashcard(card: Card) {
     </Carousel.Slide>
 }
 
-function ActionButtons() {
-    // let user = Auth.useUser();
+function ActionButtons(props: {set: Set}) {
+    let user = Auth.useUser();
 
-    // if (user.user == null) return <div />
-    // if (user.user.id != props.set.user) return <div />
+    if (user.user == null) return <div />
+    if (user.user.id != props.set.user) return <div />
 
     return <Group justify="center">
         <ReviewIcon />
