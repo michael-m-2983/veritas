@@ -20,11 +20,9 @@ import "./theme/style.css"
 
 import { AuthPage } from './pages/AuthPage.tsx';
 import { Auth } from '@supabase/auth-ui-react';
-import { ReviewLayout, ReviewMatching, ReviewMenu, reviewMethods, ReviewTable } from './pages/Review.tsx';
+import { ReviewLayout, ReviewMenu, reviewMethods } from './pages/Review.tsx';
 
 export const backend = new SupabaseBackend();
-
-const ReviewPage = () => <p>Hello, world!</p>;
 
 const router = createHashRouter([
   {
