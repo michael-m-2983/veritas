@@ -70,7 +70,7 @@ export class SupabaseBackend implements Backend {
     }
 
     async listSets(): Promise<[string, string, SetID][]> {
-        const { data, error } = await this.client.from("sets").select("id,title,description");
+        const { data, error } = await this.client.from("sets").select("user,id,title,description").filter("user", "eq", (await this.client.auth.getUser()).data.user?.id);
 
         if (!data) throw Error("Got no data when requesting set list! " + error.details);
 
