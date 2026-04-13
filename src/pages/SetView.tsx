@@ -5,11 +5,13 @@ import { ActionIcon, Center, Container, Group, Paper, Space, Text, Title, Toolti
 import { Carousel } from "@mantine/carousel";
 import { useDebouncedValue, useDisclosure } from "@mantine/hooks";
 import { Auth } from "@supabase/auth-ui-react";
+import type { CSSProperties } from "react";
+import { useState } from "react";
 
 export default function SetViewPage() {
     let loaderData = useLoaderData();
-
     let set: Set = loaderData.set;
+    const [shareMessage, setShareMessage] = useState<string>("");
 
     if (set == undefined) return <ErrorPopup message={"This set does not exist!"} />
 
@@ -20,7 +22,16 @@ export default function SetViewPage() {
 
         <Space h={20} />
 
-        <ActionButtons set={set} />
+        <ActionButtons set={set} onShare={() => {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                setShareMessage("Link copied to clipboard.");
+            }).catch(() => {
+                setShareMessage("Copy failed. Please copy the URL manually.");
+            });
+        }} />
+
+        {shareMessage ? <Text size="sm" c="dimmed">{shareMessage}</Text> : null}
 
         <Space h={40} />
 
@@ -44,7 +55,7 @@ function Flashcard(card: Card) {
             duration={200}
             timingFunction="ease"
         >
-            {styles => <Paper
+            {(styles: CSSProperties) => <Paper
                 shadow="md"
                 withBorder
                 p="xl"
@@ -60,28 +71,32 @@ function Flashcard(card: Card) {
     </Carousel.Slide>
 }
 
-function ActionButtons(props: {set: Set}) {
+function ActionButtons(props: {set: Set; onShare: () => void}) {
     let user = Auth.useUser();
 
-    if (user.user == null) return <div />
-    if (user.user.id != props.set.user) return <div />
-
     return <Group justify="center">
-        <ReviewIcon />
-        <EditIcon/>
+        <ShareIcon onShare={props.onShare} />
+        {user.user != null && user.user.id == props.set.user ? <ReviewIcon /> : null}
+        {user.user != null && user.user.id == props.set.user ? <EditIcon /> : null}
     </Group>
+}
 
+function ShareIcon(props: {onShare: () => void}) {
+    return <Tooltip label="Share"><ActionIcon variant="outline" color="rgba(255, 255, 255, 1)" onClick={props.onShare}>
+        {/* Heroicons share icon */}
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+        </svg>
+    </ActionIcon></Tooltip>
 }
 
 function ReviewIcon() {
-
     return <Tooltip label="Review"><ActionIcon variant="outline" color="rgba(255, 255, 255, 1)" component={Link} to="review">
         {/* Heroicons light bulb icon */}
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
         </svg>
     </ActionIcon></Tooltip>
-
 }
 
 function EditIcon() {
