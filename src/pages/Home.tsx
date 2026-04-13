@@ -14,7 +14,6 @@ export function HomePage() {
                 <Title order={2}>Veritas</Title>
                 <Text c="dimmed">Flash card application</Text>
             </div>
-            {!user.user ? <Button component={Link} to="/auth">Sign in</Button> : null}
         </div>
 
         <Space h="md" />

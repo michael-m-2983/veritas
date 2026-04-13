@@ -39,9 +39,16 @@ You can request features through the issues tab, or make a PR yourself and I'll 
 - [ ] Improve UX on mobile
 - [ ] Add additional ways to review content, e.g. matching, written, MCQ
     - [x] Table
-    - [ ] Matching
-    - [ ] MCQ
+    - [x] Matching
+    - [x] MCQ
 - [ ] Add search on the homepage
 - [ ] Add an account settings page
     - [ ] Update display name
     - [ ] Account deletion button
+
+Matching
+- [ ] Switch to card layout?
+
+MCQ:
+- [ ] Show which ones were correct and which were not
+- [ ] Add back button
